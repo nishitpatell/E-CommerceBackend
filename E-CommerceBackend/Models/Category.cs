@@ -4,9 +4,9 @@ namespace E_CommerceBackend.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
 
-        [Required(ErrorMessage = "Please enter name..")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter Category name..")]
+        public string CategoryName { get; set; }
     }
 }
