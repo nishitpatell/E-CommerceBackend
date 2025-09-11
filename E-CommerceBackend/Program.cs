@@ -2,6 +2,8 @@ using E_CommerceBackend.Data;
 using E_CommerceBackend.MappingProfiles;
 using E_CommerceBackend.Repository;
 using E_CommerceBackend.Repository.IRepository;
+using E_CommerceBackend.Services;
+using E_CommerceBackend.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,9 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  
-
-//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddAutoMapper(cfg => {
     cfg.AddProfile<CategoryProfile>();
