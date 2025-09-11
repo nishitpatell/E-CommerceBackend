@@ -1,6 +1,7 @@
 ﻿using E_CommerceBackend.Data;
 using E_CommerceBackend.Models;
 using E_CommerceBackend.Repository.IRepository;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceBackend.Repository
@@ -14,11 +15,31 @@ namespace E_CommerceBackend.Repository
             _sqldb = sqldb;
         }
 
+        public async Task<Category> GetCategoryByIdAsync(int id)
+        {
+            return await _sqldb.Categories.FirstOrDefaultAsync(o => o.CategoryId == id);
+        }
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+        {
+            return await _sqldb.Categories.ToListAsync();
+        }
+
         public async Task<Category> CreateCategoryAsync(Category obj)
         {
             await _sqldb.Categories.AddAsync(obj);
-            await _sqldb.SaveChangesAsync();
             return obj;
+        }
+
+        public async Task<Category> UpdateCategoryAsync(Category obj)
+        {
+            var objFromDb = await _sqldb.Categories.FirstOrDefaultAsync(o => o.CategoryId == obj.CategoryId);
+            if (objFromDb is not null)
+            {
+                objFromDb.CategoryName = obj.CategoryName;
+                _sqldb.Categories.Update(objFromDb);
+                return objFromDb;
+            }
+            return null;
         }
 
         public async Task<bool> DeleteCategoryAsync(int id)
@@ -27,37 +48,10 @@ namespace E_CommerceBackend.Repository
             if(category != null)
             {
                 _sqldb.Categories.Remove(category);
-                return (await _sqldb.SaveChangesAsync()) > 0; //_sqldb.SaveChanges returns an integer value which tells how many records were updated 
+                return true;
             }
             return false;
         }
-
-        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
-        {
-            return await _sqldb.Categories.ToListAsync();
-        }
-
-        public async Task<Category> GetCategoryByIdAsync(int id)
-        {
-            var category = await _sqldb.Categories.FirstOrDefaultAsync(o => o.CategoryId == id); 
-            if (category != null)
-            {
-                return category;
-            }
-            return new Category();
-        }
-
-        public async Task<Category> UpdateCategoryAsync(Category obj)
-        {
-            var objFromDb = _sqldb.Categories.FirstOrDefault(o => o.CategoryId == obj.CategoryId);
-            if(objFromDb is not null)
-            {
-                objFromDb.CategoryName = obj.CategoryName;
-                _sqldb.Categories.Update(objFromDb);
-                await _sqldb.SaveChangesAsync();
-                return objFromDb;
-            }
-            return obj;
-        }
+        
     }
 }
