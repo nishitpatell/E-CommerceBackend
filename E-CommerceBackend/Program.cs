@@ -1,7 +1,9 @@
 using E_CommerceBackend.Data;
+using E_CommerceBackend.MappingProfiles;
 using E_CommerceBackend.Repository;
 using E_CommerceBackend.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddAutoMapper(cfg => {
+    cfg.AddProfile<CategoryProfile>();
+    // Add other profiles here if needed
+});
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
