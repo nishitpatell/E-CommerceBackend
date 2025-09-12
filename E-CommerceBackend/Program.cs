@@ -23,6 +23,15 @@ builder.Services.AddAutoMapper(cfg => {
     // Add other profiles here if needed
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorE_CommerceApp",
+        policy => policy.WithOrigins("https://localhost:7192") 
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -35,6 +44,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("BlazorE_CommerceApp");
 
 app.UseHttpsRedirection();
 
