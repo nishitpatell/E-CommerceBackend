@@ -16,7 +16,8 @@ namespace E_CommerceBackend.Models
 
         public string? SpecialTag { get; set; }
         [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category.")]
+        public int CategoryId { get; set; } 
 
         public string? ProductImageUrl { get; set; }    
     }

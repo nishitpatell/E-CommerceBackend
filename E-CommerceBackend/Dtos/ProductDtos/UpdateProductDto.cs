@@ -13,6 +13,7 @@ namespace E_CommerceBackend.Dtos.ProductDtos
         public string? ProductDescription { get; set; }
         public string? SpecialTag { get; set; }
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category.")]
         public int CategoryId { get; set; }
         public string? ProductImageUrl { get; set; }
     }
