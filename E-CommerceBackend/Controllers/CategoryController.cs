@@ -56,7 +56,7 @@ namespace E_CommerceBackend.Controllers
             }
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
 
-            return NoContent();
+            return Ok(updateCategoryDto);
         }
 
         [HttpDelete("{id:int}")]

@@ -1,4 +1,5 @@
 using E_CommerceBackend.Data;
+using E_CommerceBackend.Handlers;
 using E_CommerceBackend.MappingProfiles;
 using E_CommerceBackend.Repository;
 using E_CommerceBackend.Repository.IRepository;
@@ -31,7 +32,8 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod());
 });
 
-
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,6 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("BlazorE_CommerceApp");
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
