@@ -7,11 +7,13 @@ namespace E_CommerceBackend.Repository
     {
         private readonly SqlDbContext _sqldb;
         public ICategoryRepository Categories {  get; private set; }
+        public IProductRepository Products { get; private set; }
 
         public UnitOfWork(SqlDbContext sqlDb)
         {
             _sqldb = sqlDb;
             Categories = new CategoryRepository(_sqldb);
+            Products = new ProductRepository(_sqldb);
         }
 
         public Task<int> SaveAsync()
