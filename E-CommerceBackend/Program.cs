@@ -52,6 +52,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("BlazorE_CommerceApp");
 app.UseExceptionHandler();
 
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

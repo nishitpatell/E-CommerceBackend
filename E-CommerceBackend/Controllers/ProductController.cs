@@ -53,6 +53,11 @@ namespace E_CommerceBackend.Controllers
             {
                 return BadRequest("Id mismatch between route and body.");
             }
+            if(await _productService.GetProductByIdAsync(id) == null)
+            {
+                return BadRequest($"Product does not exist");
+            }
+
             await _productService.UpdateProductAsync(updateProductDto);
             
             return Ok(updateProductDto);
@@ -63,6 +68,26 @@ namespace E_CommerceBackend.Controllers
         {
             await _productService.DeleteProductAsync(id);
             return NoContent();
+        }
+
+
+        [HttpPost("{id:int}/image")]
+        [Consumes("multipart/form-data")]   // Tell Swagger this endpoint expects form data
+        public async Task<IActionResult> UploadProductImage(int id, [FromForm] ProductImageUploadDto productImageUploadDto)
+        {
+            if (productImageUploadDto.File == null || productImageUploadDto.File.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            var success = await _productService.UpdateProductImageAsnc(id, productImageUploadDto);
+
+            if (success)
+            {
+                return Ok("Image uploaded successfully.");
+            }
+
+            return StatusCode(500, "An error occured while uploading the image.");
         }
     }
 }
