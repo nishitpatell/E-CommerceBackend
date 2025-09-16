@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using E_CommerceBackend.Dtos.CategoryDtos;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_CommerceBackend.Dtos.ProductDtos
@@ -16,6 +17,8 @@ namespace E_CommerceBackend.Dtos.ProductDtos
         public string? SpecialTag { get; set; }
         
         public int CategoryId { get; set; }
+        public CategoryDto Category { get; set; }
+
 
         public string? ProductImageUrl { get; set; }
     }

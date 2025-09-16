@@ -5,7 +5,7 @@ namespace E_CommerceBackend.Dtos.ProductDtos
     public class UpdateProductDto
     {
         [Required]
-    public int ProductId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Range(0.01, 100000)]

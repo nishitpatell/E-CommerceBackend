@@ -16,7 +16,10 @@ namespace E_CommerceBackend.Repository
         }
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            return await _sqldb.Products.ToListAsync();
+            //return await _sqldb.Products.ToListAsync();
+            return await _sqldb.Products
+                .Include(p => p.Category)
+                .ToListAsync();
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
@@ -36,6 +39,11 @@ namespace E_CommerceBackend.Repository
             if (objFromDb is not null)
             {
                 objFromDb.ProductName = obj.ProductName;
+                objFromDb.ProductPrice = obj.ProductPrice;
+                objFromDb.ProductDescription = obj.ProductDescription;
+                objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.SpecialTag = obj.SpecialTag;
+                objFromDb.ProductImageUrl = obj.ProductImageUrl;
                 _sqldb.Products.Update(objFromDb);
                 return objFromDb;
             }
