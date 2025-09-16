@@ -4,6 +4,7 @@
     {
         ICategoryRepository Categories { get; }
         IProductRepository Products { get; }
+        IFileRepository Files { get; }
         Task<int> SaveAsync();
     }
 }

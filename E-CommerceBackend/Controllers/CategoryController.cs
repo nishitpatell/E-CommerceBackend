@@ -1,6 +1,7 @@
 ﻿using E_CommerceBackend.Dtos.CategoryDtos;
 using E_CommerceBackend.Models;
 using E_CommerceBackend.Repository.IRepository;
+using E_CommerceBackend.Services;
 using E_CommerceBackend.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +55,11 @@ namespace E_CommerceBackend.Controllers
             {
                 return BadRequest("Id mismatch between route and body.");
             }
+            if (await _categoryService.GetCategoryByIdAsync(id) == null)
+            {
+                return BadRequest($"Category does not exist");
+            }
+
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
 
             return Ok(updateCategoryDto);

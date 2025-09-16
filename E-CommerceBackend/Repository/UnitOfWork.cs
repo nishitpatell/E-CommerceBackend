@@ -6,14 +6,20 @@ namespace E_CommerceBackend.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SqlDbContext _sqldb;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         public ICategoryRepository Categories {  get; private set; }
         public IProductRepository Products { get; private set; }
+        public IFileRepository Files { get; private set; }
 
-        public UnitOfWork(SqlDbContext sqlDb)
+        public UnitOfWork(SqlDbContext sqlDb, IWebHostEnvironment webHostEnvironment)
         {
             _sqldb = sqlDb;
+            _webHostEnvironment = webHostEnvironment;
+
             Categories = new CategoryRepository(_sqldb);
             Products = new ProductRepository(_sqldb);
+            Files = new FileRepository(_webHostEnvironment);
         }
 
         public Task<int> SaveAsync()
