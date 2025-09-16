@@ -52,7 +52,7 @@ namespace E_CommerceBackend.Controllers
         {
             if (id != updateCategoryDto.CategoryId)
             {
-                return BadRequest("Id mismatch betwenn route and body.");
+                return BadRequest("Id mismatch between route and body.");
             }
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
 

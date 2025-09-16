@@ -3,10 +3,11 @@ using E_CommerceBackend.Dtos.ProductDtos;
 using E_CommerceBackend.Dtos.ProductDtos;
 using E_CommerceBackend.Models;
 using E_CommerceBackend.Repository.IRepository;
+using E_CommerceBackend.Services.IServices;
 
 namespace E_CommerceBackend.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

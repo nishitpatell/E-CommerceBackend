@@ -21,7 +21,7 @@ namespace E_CommerceBackend.Repository
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            return await _sqldb.Products.FirstOrDefaultAsync(o => o.CategoryId == id);
+            return await _sqldb.Products.FirstOrDefaultAsync(o => o.ProductId == id);
         }
 
         public async Task<Product> CreateProductAsync(Product obj)
