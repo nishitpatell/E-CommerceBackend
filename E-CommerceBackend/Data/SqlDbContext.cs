@@ -1,9 +1,11 @@
 ﻿using E_CommerceBackend.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceBackend.Data
 {
-    public class SqlDbContext : DbContext 
+    public class SqlDbContext : IdentityDbContext<IdentityUser>
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
