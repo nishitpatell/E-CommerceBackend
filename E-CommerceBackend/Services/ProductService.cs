@@ -58,7 +58,8 @@ namespace E_CommerceBackend.Services
         public async Task<string> UpdateProductImageAsync(int productId, ProductImageUploadDto productImageUploadDto)
         {
             IFormFile imagefile = productImageUploadDto.File;
-            var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "images/products");
+            //var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "images/products");
+            var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "C:\\Users\\NPatel\\Practice Stuff\\Practice Projects\\BlazorE-CommerceApp\\BlazorE-CommerceApp\\wwwroot\\product\\productImages\\");
 
             if (string.IsNullOrEmpty(imagePath))
             {

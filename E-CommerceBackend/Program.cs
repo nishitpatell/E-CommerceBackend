@@ -24,7 +24,7 @@ builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
+//builder.Services.AddScoped<IAccountService, AccountService>();
 
 
 builder.Services.AddAutoMapper(cfg => {
@@ -41,8 +41,8 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod());
 });
 
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
+//builder.Services.AddAuthentication();
+//builder.Services.AddAuthorization();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -65,8 +65,8 @@ app.UseExceptionHandler();
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 app.MapControllers();
 
