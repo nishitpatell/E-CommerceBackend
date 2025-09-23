@@ -1,6 +1,7 @@
 using E_CommerceBackend.Data;
 using E_CommerceBackend.Handlers;
 using E_CommerceBackend.MappingProfiles;
+using E_CommerceBackend.Models;
 using E_CommerceBackend.Repository;
 using E_CommerceBackend.Repository.IRepository;
 using E_CommerceBackend.Services;
@@ -19,10 +20,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<SqlDbContext>()
-    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

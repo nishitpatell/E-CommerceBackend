@@ -72,7 +72,7 @@ namespace E_CommerceBackend.Controllers
 
 
         [HttpPost("{id:int}/image")]  // Tell Swagger this endpoint expects form data
-        public async Task<IActionResult> UploadProductImage(int id, [FromForm] ProductImageUploadDto productImageUploadDto)
+        public async Task<ActionResult<string>> UploadProductImage(int id, [FromForm] ProductImageUploadDto productImageUploadDto)
         {
             if (productImageUploadDto.File == null || productImageUploadDto.File.Length == 0)
             {
@@ -91,11 +91,11 @@ namespace E_CommerceBackend.Controllers
                 return BadRequest("File size limit exceeded (max 5 MB).");
             }
 
-            var success = await _productService.UpdateProductImageAsnc(id, productImageUploadDto);
+            var success = await _productService.UpdateProductImageAsync(id, productImageUploadDto);
 
-            if (success)
+            if (success is not null)
             {
-                return Ok("Image uploaded successfully.");
+                return Ok(success);
             }
 
             return StatusCode(500, "An error occured while uploading the image.");

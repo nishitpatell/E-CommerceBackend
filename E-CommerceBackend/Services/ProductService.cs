@@ -55,27 +55,27 @@ namespace E_CommerceBackend.Services
             return result;
         }
 
-        public async Task<bool> UpdateProductImageAsnc(int productId, ProductImageUploadDto productImageUploadDto)
+        public async Task<string> UpdateProductImageAsync(int productId, ProductImageUploadDto productImageUploadDto)
         {
             IFormFile imagefile = productImageUploadDto.File;
             var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "images/products");
 
             if (string.IsNullOrEmpty(imagePath))
             {
-                return false;
+                return null;
             }
 
             var product = await _unitOfWork.Products.GetProductByIdAsync(productId);
             if (product == null)
             {
-                return false;
+                return null;
             }
 
             product.ProductImageUrl = imagePath;
             await _unitOfWork.Products.UpdateProductAsync(product);
             await _unitOfWork.SaveAsync();  
 
-            return true;
+            return imagePath;
         }
     }
 }

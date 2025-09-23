@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceBackend.Data
 {
-    public class SqlDbContext : IdentityDbContext<IdentityUser>
+    public class SqlDbContext : DbContext
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
