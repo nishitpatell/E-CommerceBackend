@@ -18,10 +18,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<ApiUser, IdentityRole>()
-    .AddEntityFrameworkStores<SqlDbContext>()
-    .AddDefaultTokenProviders();
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
