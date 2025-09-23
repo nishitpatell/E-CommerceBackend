@@ -18,7 +18,7 @@ namespace E_CommerceBackend.Repository
         {
             //return await _sqldb.Products.ToListAsync();
             return await _sqldb.Products
-                .Include(p => p.Category)
+                .Include(p => p.Category).AsNoTracking()
                 .ToListAsync();
         }
 
