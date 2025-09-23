@@ -71,20 +71,31 @@ namespace E_CommerceBackend.Controllers
         }
 
 
-        [HttpPost("{id:int}/image")]
-        [Consumes("multipart/form-data")]   // Tell Swagger this endpoint expects form data
-        public async Task<IActionResult> UploadProductImage(int id, [FromForm] ProductImageUploadDto productImageUploadDto)
+        [HttpPost("{id:int}/image")]  // Tell Swagger this endpoint expects form data
+        public async Task<ActionResult<string>> UploadProductImage(int id, [FromForm] ProductImageUploadDto productImageUploadDto)
         {
             if (productImageUploadDto.File == null || productImageUploadDto.File.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
 
-            var success = await _productService.UpdateProductImageAsnc(id, productImageUploadDto);
-
-            if (success)
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(productImageUploadDto.File.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(extension))
             {
-                return Ok("Image uploaded successfully.");
+                return BadRequest("Only .jpg, .jpeg, and .png files are allowed.");
+            }
+
+            if(productImageUploadDto.File.Length > 5 * 1024 * 1024)
+            {
+                return BadRequest("File size limit exceeded (max 5 MB).");
+            }
+
+            var success = await _productService.UpdateProductImageAsync(id, productImageUploadDto);
+
+            if (success is not null)
+            {
+                return Ok(success);
             }
 
             return StatusCode(500, "An error occured while uploading the image.");

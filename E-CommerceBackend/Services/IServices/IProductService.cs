@@ -11,6 +11,6 @@ namespace E_CommerceBackend.Services.IServices
         Task<ProductDto> UpdateProductAsync(UpdateProductDto updateProductDto);
         Task<bool> DeleteProductAsync(int id);
 
-        Task<bool> UpdateProductImageAsnc(int productId, ProductImageUploadDto productImageUploadDto);
+        Task<string> UpdateProductImageAsync(int productId, ProductImageUploadDto productImageUploadDto);
     }
 }

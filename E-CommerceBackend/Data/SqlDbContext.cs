@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceBackend.Data
 {
-    public class SqlDbContext : DbContext 
+    public class SqlDbContext : IdentityDbContext<ApiUser>
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
