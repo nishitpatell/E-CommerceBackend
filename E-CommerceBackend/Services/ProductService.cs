@@ -61,6 +61,14 @@ namespace E_CommerceBackend.Services
             //var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "images/products");
             var imagePath = await _unitOfWork.Files.SaveFileAsync(imagefile, "C:\\Users\\NPatel\\Practice Stuff\\Practice Projects\\BlazorE-CommerceApp\\BlazorE-CommerceApp\\wwwroot\\product\\productImages\\");
 
+            string marker = @"product/productImages/";
+
+            // Find the index of the marker in the full path
+            int index = imagePath.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+
+            string relativePath = index >= 0 ? imagePath.Substring(index) : string.Empty;
+            imagePath = relativePath;
+
             if (string.IsNullOrEmpty(imagePath))
             {
                 return null;
