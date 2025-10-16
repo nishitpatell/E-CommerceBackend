@@ -19,7 +19,6 @@ namespace E_CommerceBackend.Dtos.ProductDtos
         public int CategoryId { get; set; }
         public CategoryDto Category { get; set; }
 
-
         public string? ProductImageUrl { get; set; }
     }
 }
