@@ -20,7 +20,11 @@ namespace E_CommerceBackend.Controllers
            _accountService = accountService;
         }
 
-
+        /// <summary>
+        /// this controller registers the user
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
@@ -33,6 +37,11 @@ namespace E_CommerceBackend.Controllers
             return Ok("User registered successfully");  
         }
 
+        /// <summary>
+        /// This controller logs in the registered user
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>IIAction</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {

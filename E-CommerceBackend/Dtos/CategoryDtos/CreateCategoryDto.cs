@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoMapper;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_CommerceBackend.Dtos.CategoryDtos
 {
